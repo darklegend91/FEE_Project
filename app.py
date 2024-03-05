@@ -10,6 +10,7 @@ def index():
 
 @app.route('/send_email', methods=['GET', 'POST'])
 
+#passing the arguments from form to python function. 
 def send_email():
     fname = request.form['fname']
     lname = request.form.get('lname')
@@ -24,9 +25,10 @@ def send_email():
     redirect("/")
     return render_template("result.html", email=recipient_email,fname=fname,lname=lname,ename=ename,para=para,ctime=ctime)
 
+#Defining mail sending function
 def sendmail(recipient_email,fname,lname,ename,ctime):
-    email_sender="projectfee2023group4@gmail.com"
-    email_password= "vccw gzym tydk dywx"
+    email_sender="Enter your own gmail."
+    email_password= "Enter your passkey generated via google apps in gmail application."
     
     subject ="Regarding your Countdown page for event."
     body=f"{fname} {lname}, your {ename} countdown for {ctime} has been created .Thanks for using our platform for the work."
@@ -41,8 +43,6 @@ def sendmail(recipient_email,fname,lname,ename,ctime):
         try:
           
             server.login(email_sender, email_password)
-
-          
             server.sendmail(email_sender, recipient_email, em.as_string())
             print("Email sent successfully!")
 
